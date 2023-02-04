@@ -7,6 +7,12 @@
 # Note: use 0-based indexing for position and frame (biology uses 1-based)
 
 dna = 'ATGGCCTTT'
+frame = 0
+
+for position in range(0, len(dna), 3):
+	for frame in range(3):
+		print(position + frame, frame, dna[position+frame])
+
 
 
 """
