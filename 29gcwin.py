@@ -13,7 +13,18 @@
 
 seq = 'ACGACGCAGGAGGAGAGTTTCAGAGATCACGAATACATCCATATTACCCAGAGAGAG'
 w = 11
+gc_content = 0
 
+for i in range(len(seq)-10):
+	gc_content = 0
+	for nt in seq[i:i+w]:
+		if nt == 'G' or nt == 'C':
+			gc_content += 1 
+	print(i, end=' ')
+	print(seq[i:i+w], end=' ')
+	print("%.4f" % (gc_content/w))
+
+	
 
 """
 python3 26gcwin.py
