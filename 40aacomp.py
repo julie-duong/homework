@@ -9,6 +9,65 @@
 # Variation: use 20 named variables
 # Variation: use a list
 
+import sys
+import gzip
+
+A = 0
+C = 0
+D = 0
+E = 0
+F = 0
+G = 0
+H = 0
+I = 0
+K = 0
+L = 0
+M = 0
+N = 0
+P = 0
+Q = 0
+R = 0
+S = 0
+T = 0 
+V = 0
+W = 0
+Y = 0 
+
+total = 0
+
+with gzip.open(sys.argv[1], 'rt') as fp:
+	for line in fp.readlines():
+		line = line.rstrip()
+		if line.startswith('>'): continue
+			
+		total += len(line)
+		A += line.count('A')
+		C += line.count('C')
+		D += line.count('D')
+		E += line.count('E')
+		F += line.count('F')
+		G += line.count('G')
+		H += line.count('H')
+		I += line.count('I')
+		K += line.count('K')
+		L += line.count('L')
+		M += line.count('M')
+		N += line.count('N')
+		P += line.count('P')
+		Q += line.count('Q')
+		R += line.count('R')
+		S += line.count('S')
+		T += line.count('T')
+		V += line.count('V')
+		W += line.count('W')
+		Y += line.count('Y')
+
+count_list = [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y]		
+AA = 'ACDEFGHIKLMNPQRSTVWY'
+
+for a,b in zip(AA, count_list):
+	print(a, b, "%.4f"% float(b/total))
+
 
 """
 python3 40aacomp.py ~/DATA/E.coli/GCF_000005845.2_ASM584v2_protein.faa.gz
