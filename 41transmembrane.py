@@ -21,6 +21,40 @@
 # Hint: create a function for hydrophobic alpha-helix
 # Hint: use the same function for both signal peptide and transmembrane
 
+import sys
+import mcb185
+
+def kd_calc(seq):
+	h = 0
+	for aa in seq:
+		if aa == 'A': h += 1.8
+		elif aa == 'C': h += 2.5
+		elif aa == 'D': h += -3.5
+		elif aa == 'E': h += -3.5
+		elif aa == 'F': h += 2.8
+		elif aa == 'G': h += -0.4
+		elif aa == 'H': h += -3.2
+		elif aa == 'I': h += 4.5
+		elif aa == 'K': h += -3.9
+		elif aa == 'L': h += 3.8
+		elif aa == 'M': h += 1.9
+		elif aa == 'N': h += -3.5
+		elif aa == 'P': h += -1.6
+		elif aa == 'Q': h += -3.5
+		elif aa == 'R': h += -4.5
+		elif aa == 'S': h += -0.8
+		elif aa == 'T': h += -0.7
+		elif aa == 'V': h += 4.2
+		elif aa == 'W': h += -0.9
+		elif aa == 'Y': h += -1.3 		
+	return h/len(seq)
+
+
+		
+for defline, seq in mcb185.read_fasta(sys.argv[1]):
+	print(defline, kd_calc(seq[0:30]))
+
+
 
 """
 python3 41transmembrane.py ~/DATA/E.coli/GCF_000005845.2_ASM584v2_protein.faa.gz
