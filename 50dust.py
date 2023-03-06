@@ -50,14 +50,14 @@ def entropy(prob):
 # Switch for N-based masking
 finalseq = ''
 if arg.switch:
-	for i in range(len(seq)-1):
+	for i in range(len(seq)):
 		probs = probabilities(seq[i:arg.window+i-1])
 		if (entropy(probs) < arg.threshold):
 			finalseq += 'N'
 		else:
 			finalseq += seq[i]
 else:
-	for i in range(len(seq)-1):
+	for i in range(len(seq)):
 		probs = probabilities(seq[i:arg.window+i-1])
 		if (entropy(probs) < arg.threshold):
 			finalseq += seq[i].lower()
