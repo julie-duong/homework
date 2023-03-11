@@ -24,32 +24,28 @@ def entropy(prob):
 	entropy = 0.0
 	for p in prob:
 		if p > 0:
-			entropy -= p * math.log2(p)
+			entropy += -(p * math.log2(p))
 	return entropy
-	
+
 def probabilities(seq):
 	l = len(seq)
-	prob = [seq.count('A')/l, seq.count('C')/l, seq.count('T')/l, seq.count('G/')/l]
+	prob = [seq.count('A')/l, seq.count('C')/l, seq.count('T')/l, seq.count('G')/l]
 	return prob 
 
 for defline, seq in mcb185.read_fasta(filename):
-	words = defline.split()
-	name = words[0]
+	seq = seq.upper()
+	finalseq = list(seq)
+	for i in range(len(finalseq)-window+1):
+		frequency = probabilities(seq[i:window+i])
+		if entropy(frequency) < threshold:
+			for j in range(i, i + window):
+				finalseq[j]='N'
 
-finalseq = ''
-for i in range(len(seq)-1):
-	probs = probabilities(seq[i:window+i-1])
-	if (entropy(probs) < threshold):
-		finalseq += 'N'
-	else:
-		finalseq += seq[i]
+	seq = "".join(finalseq)
+	print(f'>{defline}')
+	for i in range(0, len(seq), 60):
+		print(seq[i:i+60])
 
-print(name)
-
-segments = [finalseq[i:i+59] for i in range(0, len(finalseq), 60)]
-
-for seg60 in segments:
-	print(seg60)
 """
 python3 42dust.py ~/DATA/E.coli/GCF_000005845.2_ASM584v2_genomic.fna.gz 11 1.4
 >NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
